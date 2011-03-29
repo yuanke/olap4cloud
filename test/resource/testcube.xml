@@ -1,0 +1,8 @@
+<cube name = "testcube" sourcePath = "/data" aggregationsCount = "1">
+	<dimension name = "d1"/>
+	<dimension name = "d2"/>
+	<dimension name = "d3"/>
+	<measure name = "m1"/>
+	<measure name = "m2"/>
+	<measure name = "m3"/>
+</cube>

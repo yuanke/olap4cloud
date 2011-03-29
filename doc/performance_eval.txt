@@ -1,0 +1,9 @@
+query								olap4cloud									hive
+
+select d3, sum(m1), sum(m2)			26s											23m45s
+, sum(m3)
+from facts where d1 = 1 
+and d2 = 1
+group by d3
+
+

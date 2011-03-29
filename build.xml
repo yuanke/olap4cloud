@@ -1,0 +1,44 @@
+<project name = "olap4cloud" default = "build">
+	<path id="lib.path.ref">
+		<fileset dir="lib" includes="*.jar"/>
+		<fileset dir="." includes="*.jar"/>
+	</path>
+	
+	<target name = "build" depends = "compile">
+		<jar destfile = "olap4cloud.jar" basedir = "classes"/>
+	</target>
+	
+	<target name = "compile">
+		<mkdir dir = "classes"/>
+		<javac destdir = "classes" classpathref="lib.path.ref" debug = "on">
+			<src path="src"/>
+		</javac>
+	</target>
+	
+	<target name = "test.generate_test_data" depends = "test.compile">
+		<java classname = "org.olap4cloud.test.GenerateTestData" classpath = "./test/classes"/>
+	</target>
+	
+	<target name = "test.build" depends = "test.compile">
+		<jar destfile = "olap4cloud-test.jar" basedir = "test/classes">
+			<fileset dir = "test/classes"/>
+			<fileset dir = "test/resource"/>
+			<!-- fileset dir = "classes"/ -->
+		</jar>
+	</target>
+	
+	<target name = "test.compile" depends = "build">
+		<mkdir dir = "test/classes"/>
+		<javac destdir = "test/classes" classpathref="lib.path.ref" debug = "on">
+			<src path="test/src"/>
+		</javac>
+	</target>
+	
+	<target name = "clean">
+		<delete>
+			<fileset dir="." includes="*.jar"/>
+		</delete>
+		<delete dir = "test/classes"/>
+		<delete dir = "classes"/>
+	</target>
+</project>
